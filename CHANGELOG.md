@@ -4,34 +4,6 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-## [0.3.1] - 2024-03-20
-
-### Fixed
-- ESLint errors in GameBoard and TestGameBoard components
-- Unused variable warnings
-- Proper handling of onGameEnd callback in TestGameBoard
-- Code cleanup for better maintainability
-
-## [0.3.0] - 2024-03-20
-
-### Added
-- Implemented reducer pattern for game state management
-- Atomic state updates for more reliable game state transitions
-- Enhanced logging for better debugging
-- Improved type safety with GameState interface
-
-### Changed
-- Refactored TestGameBoard component to use useReducer
-- Consolidated state management logic
-- Improved winner detection reliability
-- Enhanced state update consistency
-
-### Fixed
-- Game state not updating correctly after wins
-- Inconsistent winner message display
-- Race conditions in state updates
-- Score update timing issues
-
 ## [0.2.0] - 2024-03-19
 
 ### Added
@@ -67,4 +39,26 @@ All notable changes to this project will be documented in this file.
 - Score tracking
 - Game board with animations
 - Keyboard navigation support
-- Mobile-friendly layout 
+- Mobile-friendly layout
+
+## [0.1.1] - 2024-02-20
+### Changed
+- Updated Next.js configuration for Netlify deployment
+  - Changed output to 'export' for static deployment
+  - Configured image optimization settings
+  - Added trailing slash support
+- Enhanced Netlify configuration
+  - Added security headers
+  - Set Node.js version to 18.18.0
+  - Disabled telemetry
+  - Added proper build settings
+- Updated dependencies to latest versions
+  - Next.js to ^14.2.28
+  - React and React DOM to 18.3.1
+  - netlify-cli to ^17.38.1
+  - Other minor dependency updates
+
+### Fixed
+- Fixed build configuration for Netlify deployment
+- Resolved peer dependency issues with React and React DOM
+- Removed invalid experimental options from Next.js config 
