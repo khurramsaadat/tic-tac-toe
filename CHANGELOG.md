@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.2.1] - 2024-03-19
+### Fixed
+- Fixed Netlify TOML configuration syntax for proper parsing
+- Corrected environment variables format in netlify.toml
+
 ## [0.2.0] - 2024-03-19
 
 ### Added
