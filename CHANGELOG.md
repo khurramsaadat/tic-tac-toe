@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.2.2] - 2024-03-19
+### Changed
+- Updated Netlify deployment configuration
+  - Changed publish directory from `.next` to `out`
+  - Removed @netlify/plugin-nextjs plugin
+  - Added NETLIFY_NEXT_PLUGIN_SKIP environment variable
+  - Simplified build process for static export
+
 ## [0.2.1] - 2024-03-19
 ### Fixed
 - Fixed Netlify TOML configuration syntax for proper parsing
