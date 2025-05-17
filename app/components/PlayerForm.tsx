@@ -44,7 +44,13 @@ const PlayerForm: React.FC<PlayerFormProps> = ({ onStart }) => {
           placeholder="Enter name"
         />
       </div>
-      <button type="submit" className={styles.button}>Start Game</button>
+      <button 
+        type="submit" 
+        className={styles.button}
+        disabled={!player1Name || !player2Name}
+      >
+        Start Game
+      </button>
     </form>
   );
 };

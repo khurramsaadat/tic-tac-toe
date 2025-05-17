@@ -1,11 +1,8 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import styles from './GameBoard.module.css';
-
-const Confetti = dynamic(() => import('react-confetti'), { ssr: false });
 
 interface GameBoardProps {
   player1Name: string;
@@ -18,41 +15,6 @@ interface ScoreType {
 }
 
 const GameBoard: React.FC<GameBoardProps> = ({ player1Name, player2Name, onGameEnd }) => {
-  const [board, setBoard] = useState<Array<string | null>>(Array(9).fill(null));
-  const [isXNext, setIsXNext] = useState(true);
-  const [scores, setScores] = useState<ScoreType>(() => {
-    // Initialize scores from localStorage if available
-    const savedScores = localStorage.getItem('ticTacToeScores');
-    if (savedScores) {
-      const parsedScores = JSON.parse(savedScores);
-      // Only use saved scores if player names match
-      if (parsedScores[player1Name] !== undefined && parsedScores[player2Name] !== undefined) {
-        return parsedScores;
-      }
-    }
-    // Otherwise initialize new scores
-    return {
-      [player1Name]: 0,
-      [player2Name]: 0,
-    };
-  });
-  const [showConfetti, setShowConfetti] = useState(false);
-  const [selectedSquare, setSelectedSquare] = useState<number>(-1);
-  const [winningLine, setWinningLine] = useState<number[] | null>(null);
-  const [scoreUpdated, setScoreUpdated] = useState<string | null>(null);
-
-  useEffect(() => {
-    // Save scores to localStorage whenever they change
-    localStorage.setItem('ticTacToeScores', JSON.stringify(scores));
-  }, [scores]);
-
-  useEffect(() => {
-    // Reset board when component key changes (new game)
-    setBoard(Array(9).fill(null));
-    setIsXNext(true);
-    setWinningLine(null);
-  }, []);
-
   const calculateWinner = (squares: Array<string | null>): [string | null, number[] | null] => {
     const lines = [
       [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
@@ -69,32 +31,110 @@ const GameBoard: React.FC<GameBoardProps> = ({ player1Name, player2Name, onGameE
     return [null, null];
   };
 
-  const handleClick = useCallback((index: number) => {
-    if (board[index] || calculateWinner(board)[0]) return;
+  const [board, setBoard] = useState<Array<string | null>>(Array(9).fill(null));
+  const [isXNext, setIsXNext] = useState(true);
+  const [scores, setScores] = useState<ScoreType>(() => {
+    // Initialize scores from localStorage if available
+    const savedScores = localStorage.getItem('ticTacToeScores');
+    if (savedScores) {
+      try {
+        const parsedScores = JSON.parse(savedScores);
+        // Only use saved scores if player names match
+        if (parsedScores[player1Name] !== undefined && parsedScores[player2Name] !== undefined) {
+          return parsedScores;
+        }
+      } catch (error) {
+        console.error('Error parsing saved scores:', error);
+      }
+    }
+    // Otherwise initialize new scores
+    return {
+      [player1Name]: 0,
+      [player2Name]: 0,
+    };
+  });
+  const [selectedSquare, setSelectedSquare] = useState<number>(-1);
+  const [winningLine, setWinningLine] = useState<number[] | null>(null);
+  const [scoreUpdated, setScoreUpdated] = useState<string | null>(null);
+  const [gameState, setGameState] = useState<'playing' | 'draw' | 'won'>('playing');
+  const [gameEnded, setGameEnded] = useState(false);
 
-    const newBoard = board.slice();
-    newBoard[index] = isXNext ? 'X' : 'O';
-    setBoard(newBoard);
+  // Calculate current game state
+  const [currentWinner] = calculateWinner(board);
+  const currentPlayer = isXNext ? player1Name : player2Name;
+  const isDraw = !currentWinner && !board.includes(null);
 
-    const [winner, line] = calculateWinner(newBoard);
+  const getStatusMessage = useCallback(() => {
+    if (gameState === 'won') {
+      const [winner] = calculateWinner(board);
+      const winnerName = winner === 'X' ? player1Name : player2Name;
+      return (
+        <div className={styles.winnerInfo}>
+          <div className={styles.winnerTitle}>Winner!</div>
+          <div className={styles.winnerName}>
+            {winnerName}
+            <span className={styles.winnerSymbol}>({winner})</span>
+          </div>
+        </div>
+      );
+    }
+    if (gameState === 'draw') {
+      return (
+        <div className={styles.winnerInfo}>
+          <div className={styles.winnerTitle}>Draw!</div>
+          <div className={styles.winnerName}>Good game!</div>
+        </div>
+      );
+    }
+    return (
+      <div className={styles.turnInfo}>
+        Next player: {currentPlayer} ({isXNext ? 'X' : 'O'})
+      </div>
+    );
+  }, [gameState, board, player1Name, player2Name, currentPlayer, isXNext]);
+
+  useEffect(() => {
+    const [winner, line] = calculateWinner(board);
+    const isDraw = !winner && !board.includes(null);
+    
     if (winner) {
       const winnerName = winner === 'X' ? player1Name : player2Name;
+      console.log('Winner detected:', { winnerName, symbol: winner });
+      
+      setGameState('won');
+      setGameEnded(true);
       setWinningLine(line);
+      
       setScores(prev => ({
         ...prev,
         [winnerName]: prev[winnerName] + 1
       }));
       setScoreUpdated(winnerName);
-      setTimeout(() => setScoreUpdated(null), 500);
-      setShowConfetti(true);
-      setTimeout(() => setShowConfetti(false), 5000);
+      
+      setTimeout(() => {
+        setScoreUpdated(null);
+      }, 2000);
+      
       onGameEnd?.(winnerName);
-    } else if (!newBoard.includes(null)) {
+    } else if (isDraw) {
+      console.log('Draw detected');
+      setGameState('draw');
+      setGameEnded(true);
       onGameEnd?.(null);
-    } else {
-      setIsXNext(!isXNext);
     }
-  }, [board, isXNext, player1Name, player2Name, onGameEnd]);
+  }, [board, player1Name, player2Name, onGameEnd]);
+
+  const makeMove = useCallback((index: number) => {
+    if (board[index] || gameEnded) {
+      console.log('Move ignored - Square occupied or game ended');
+      return;
+    }
+
+    const newBoard = board.slice();
+    newBoard[index] = isXNext ? 'X' : 'O';
+    setBoard(newBoard);
+    setIsXNext(!isXNext);
+  }, [board, isXNext, gameEnded]);
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     const handleArrowKey = (direction: 'up' | 'down' | 'left' | 'right') => {
@@ -142,47 +182,60 @@ const GameBoard: React.FC<GameBoardProps> = ({ player1Name, player2Name, onGameE
       case ' ':
         e.preventDefault();
         if (selectedSquare !== -1) {
-          handleClick(selectedSquare);
+          makeMove(selectedSquare);
         }
         break;
     }
-  }, [selectedSquare, handleClick]);
+  }, [selectedSquare, makeMove]);
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
 
-  const currentPlayer = isXNext ? player1Name : player2Name;
-  const [winner] = calculateWinner(board);
-  const isDraw = !winner && !board.includes(null);
+  useEffect(() => {
+    try {
+      localStorage.setItem('ticTacToeScores', JSON.stringify(scores));
+    } catch (error) {
+      console.error('Error saving scores:', error);
+    }
+  }, [scores]);
 
-  const status = winner
-    ? `Winner: ${winner === 'X' ? player1Name : player2Name}`
-    : isDraw
-    ? 'Game Draw!'
-    : `Next player: ${currentPlayer} (${isXNext ? 'X' : 'O'})`;
+  useEffect(() => {
+    const initGame = () => {
+      setBoard(Array(9).fill(null));
+      setIsXNext(true);
+      setWinningLine(null);
+      setScoreUpdated(null);
+      setSelectedSquare(-1);
+      setGameState('playing');
+      setGameEnded(false);
+    };
+
+    initGame();
+  }, []);
+
+  const startNewGame = useCallback(() => {
+    console.log('Starting new game - Resetting state');
+    setBoard(Array(9).fill(null));
+    setIsXNext(true);
+    setWinningLine(null);
+    setScoreUpdated(null);
+    setSelectedSquare(-1);
+    setGameState('playing');
+    setGameEnded(false);
+  }, []);
 
   return (
     <div className={styles.container}>
-      {showConfetti && (
-        <Confetti
-          width={window.innerWidth}
-          height={window.innerHeight}
-          recycle={false}
-          numberOfPieces={200}
-          gravity={0.3}
-        />
-      )}
-      
       <div className={styles.scoreBoard}>
-        <div className={styles.playerScore}>
+        <div className={`${styles.playerScore} ${currentWinner === 'X' ? styles.winningPlayer : ''}`}>
           <span className={styles.playerName}>{player1Name} (X)</span>
           <span className={`${styles.score} ${scoreUpdated === player1Name ? styles.scoreUpdated : ''}`}>
             {scores[player1Name]}
           </span>
         </div>
-        <div className={styles.playerScore}>
+        <div className={`${styles.playerScore} ${currentWinner === 'O' ? styles.winningPlayer : ''}`}>
           <span className={styles.playerName}>{player2Name} (O)</span>
           <span className={`${styles.score} ${scoreUpdated === player2Name ? styles.scoreUpdated : ''}`}>
             {scores[player2Name]}
@@ -190,7 +243,22 @@ const GameBoard: React.FC<GameBoardProps> = ({ player1Name, player2Name, onGameE
         </div>
       </div>
 
-      <div className={`${styles.status} ${winner ? styles.winner : ''}`}>{status}</div>
+      <div 
+        className={`${styles.status} ${
+          gameState === 'won' ? styles.winner : ''
+        } ${gameState === 'draw' ? styles.draw : ''}`}
+      >
+        {getStatusMessage()}
+      </div>
+      
+      {gameEnded && (
+        <button 
+          className={styles.newGameButton}
+          onClick={startNewGame}
+        >
+          Start New Game
+        </button>
+      )}
       
       <div className={styles.boardWrapper}>
         <Image 
@@ -207,16 +275,19 @@ const GameBoard: React.FC<GameBoardProps> = ({ player1Name, player2Name, onGameE
               key={index}
               className={`${styles.square} 
                 ${index === selectedSquare ? styles.selected : ''}
-                ${!square && !winner ? styles.hoverable : ''}`}
-              onClick={() => handleClick(index)}
+                ${!square && !gameEnded ? styles.hoverable : ''}`}
+              onClick={() => makeMove(index)}
               onFocus={() => setSelectedSquare(index)}
               onBlur={() => setSelectedSquare(-1)}
-              disabled={!!square || !!winner}
+              disabled={!!square || gameEnded}
               aria-label={`Square ${index + 1}${square ? ` marked with ${square}` : ''}`}
               role="gridcell"
             >
               {square && (
-                <div className={`${styles.mark} ${winningLine?.includes(index) ? styles.winningMark : ''}`}>
+                <div 
+                  className={`${styles.mark} ${winningLine?.includes(index) ? styles.winningMark : ''}`}
+                  key={`${index}-${square}`}
+                >
                   <Image
                     src={square === 'X' ? '/cross.svg' : '/zero.svg'}
                     alt={square}
@@ -234,4 +305,4 @@ const GameBoard: React.FC<GameBoardProps> = ({ player1Name, player2Name, onGameE
   );
 };
 
-export default GameBoard; 
+export default GameBoard;

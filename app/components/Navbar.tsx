@@ -80,6 +80,13 @@ const Navbar = () => {
             Play With System
           </Link>
           <Link 
+            href="/test" 
+            onClick={closeMenu}
+            aria-current={pathname === '/test' ? 'page' : undefined}
+          >
+            TEST
+          </Link>
+          <Link 
             href="/instructions" 
             onClick={closeMenu}
             aria-current={pathname === '/instructions' ? 'page' : undefined}

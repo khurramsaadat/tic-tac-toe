@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.3.0] - 2024-03-20
+
+### Added
+- Implemented reducer pattern for game state management
+- Atomic state updates for more reliable game state transitions
+- Enhanced logging for better debugging
+- Improved type safety with GameState interface
+
+### Changed
+- Refactored TestGameBoard component to use useReducer
+- Consolidated state management logic
+- Improved winner detection reliability
+- Enhanced state update consistency
+
+### Fixed
+- Game state not updating correctly after wins
+- Inconsistent winner message display
+- Race conditions in state updates
+- Score update timing issues
+
 ## [0.2.0] - 2024-03-19
 
 ### Added
