@@ -4,7 +4,7 @@ import { useState } from 'react';
 import styles from './PlayerForm.module.css';
 
 interface PlayerFormProps {
-  onStart: (player1Name: string, player2Name: string) => void;
+  onStart: (names: { player1: string; player2: string }) => void;
 }
 
 const PlayerForm: React.FC<PlayerFormProps> = ({ onStart }) => {
@@ -13,10 +13,9 @@ const PlayerForm: React.FC<PlayerFormProps> = ({ onStart }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onStart(
-      player1Name.trim() || 'Player 1',
-      player2Name.trim() || 'Player 2'
-    );
+    if (player1Name.trim() && player2Name.trim()) {
+      onStart({ player1: player1Name.trim(), player2: player2Name.trim() });
+    }
   };
 
   return (
@@ -28,8 +27,9 @@ const PlayerForm: React.FC<PlayerFormProps> = ({ onStart }) => {
           id="player1"
           value={player1Name}
           onChange={(e) => setPlayer1Name(e.target.value)}
-          placeholder="Enter Player 1 name"
+          required
           maxLength={20}
+          placeholder="Enter name"
         />
       </div>
       <div className={styles.inputGroup}>
@@ -39,13 +39,12 @@ const PlayerForm: React.FC<PlayerFormProps> = ({ onStart }) => {
           id="player2"
           value={player2Name}
           onChange={(e) => setPlayer2Name(e.target.value)}
-          placeholder="Enter Player 2 name"
+          required
           maxLength={20}
+          placeholder="Enter name"
         />
       </div>
-      <button type="submit" className={styles.startButton}>
-        Start Game
-      </button>
+      <button type="submit" className={styles.button}>Start Game</button>
     </form>
   );
 };

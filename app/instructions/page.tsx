@@ -1,54 +1,49 @@
 'use client';
 
-import Link from 'next/link';
 import styles from './page.module.css';
 
-export default function InstructionsPage() {
+export default function Instructions() {
   return (
-    <main className={styles.main}>
-      <h1 className={styles.title}>How to Play Tic-Tac-Toe</h1>
-      
-      <div className={styles.content}>
-        <section className={styles.section}>
-          <h2>Game Rules</h2>
-          <ul>
-            <li>The game is played on a 3x3 grid</li>
-            <li>Two players take turns: X and O</li>
-            <li>The first player to get 3 of their marks in a row (horizontally, vertically, or diagonally) wins</li>
-            <li>When all squares are filled and no player has won, the game is a draw</li>
-          </ul>
-        </section>
-
-        <section className={styles.section}>
-          <h2>How to Play</h2>
+    <div className={styles.container}>
+      <h1>How to Play Tic Tac Toe</h1>
+      <div className={styles.instructions}>
+        <section>
+          <h2>Game Setup</h2>
           <ol>
-            <li>Enter player names (or use default names)</li>
-            <li>First player plays as X, second player as O</li>
-            <li>Click any empty square to place your mark</li>
-            <li>Take turns until someone wins or the game is a draw</li>
-            <li>Click "Play Again" to start a new game</li>
+            <li>Enter names for both players when prompted</li>
+            <li>Player 1 will use &ldquo;X&rdquo; and Player 2 will use &ldquo;O&rdquo;</li>
+            <li>The game board consists of a 3x3 grid</li>
           </ol>
         </section>
 
-        <section className={styles.section}>
-          <h2>Tips</h2>
-          <ul>
-            <li>Try to block your opponent from getting three in a row</li>
-            <li>The center square is strategically important</li>
-            <li>Watch for diagonal winning opportunities</li>
-            <li>Plan two moves ahead</li>
-          </ul>
+        <section>
+          <h2>Gameplay</h2>
+          <ol>
+            <li>Players take turns placing their marks in empty squares</li>
+            <li>Player 1 (X) goes first</li>
+            <li>Click an empty square or use keyboard navigation to place your mark</li>
+            <li>The game tracks scores for both players</li>
+          </ol>
         </section>
 
-        <div className={styles.buttons}>
-          <Link href="/two-players" className={styles.playButton}>
-            Play Two Players Mode
-          </Link>
-          <Link href="/" className={styles.homeButton}>
-            Back to Home
-          </Link>
-        </div>
+        <section>
+          <h2>Winning the Game</h2>
+          <ol>
+            <li>Get three of your marks in a row (horizontally, vertically, or diagonally)</li>
+            <li>If all squares are filled and no player has won, the game is a draw</li>
+            <li>The score is automatically updated after each game</li>
+            <li>Start a new game to continue playing</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Keyboard Controls</h2>
+          <ul>
+            <li>Use arrow keys to navigate the board</li>
+            <li>Press Enter or Space to place your mark</li>
+          </ul>
+        </section>
       </div>
-    </main>
+    </div>
   );
 } 

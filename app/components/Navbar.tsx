@@ -1,66 +1,37 @@
 "use client";
 
 import { useState } from 'react';
-import Link from "next/link";
-import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
 import styles from './Navbar.module.css';
 
-const navLinks = [
-  { name: "Home", href: "/" },
-  { name: "Two Players", href: "/two-players" },
-  { name: "Play With System", href: "/play-with-system" },
-  { name: "About", href: "/about" },
-];
-
-export default function Navbar() {
-  const pathname = usePathname();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsOpen(!isOpen);
   };
 
   return (
     <nav className={styles.navbar}>
       <div className={styles.logo}>
-        <Link href="/two-players">Home</Link>
+        <Link href="/">
+          <Image src="/logo.png" alt="Tic Tac Toe" width={40} height={40} />
+        </Link>
       </div>
-
-      {/* Burger Menu Button */}
-      <button 
-        className={`${styles.burgerButton} ${isMenuOpen ? styles.open : ''}`}
-        onClick={toggleMenu}
-        aria-label="Toggle menu"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
+      <button className={styles.menuButton} onClick={toggleMenu} aria-label="Toggle menu">
+        <div className={`${styles.menuIcon} ${isOpen ? styles.open : ''}`}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </button>
-
-      {/* Navigation Links */}
-      <div className={`${styles.links} ${isMenuOpen ? styles.show : ''}`}>
-        <Link 
-          href="/two-players" 
-          className={pathname === '/two-players' || pathname === '/' ? styles.active : ''}
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Two Players
-        </Link>
-        <Link 
-          href="/play-with-system" 
-          className={pathname === '/play-with-system' ? styles.active : ''}
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Play With System
-        </Link>
-        <Link 
-          href="/instructions" 
-          className={pathname === '/instructions' ? styles.active : ''}
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Instructions
-        </Link>
+      <div className={`${styles.navLinks} ${isOpen ? styles.active : ''}`}>
+        <Link href="/" onClick={toggleMenu}>Two Players</Link>
+        <Link href="/instructions" onClick={toggleMenu}>Instructions</Link>
       </div>
     </nav>
   );
-} 
+};
+
+export default Navbar; 

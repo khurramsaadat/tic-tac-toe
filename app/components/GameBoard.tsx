@@ -69,6 +69,33 @@ const GameBoard: React.FC<GameBoardProps> = ({ player1Name, player2Name, onGameE
     return [null, null];
   };
 
+  const handleClick = useCallback((index: number) => {
+    if (board[index] || calculateWinner(board)[0]) return;
+
+    const newBoard = board.slice();
+    newBoard[index] = isXNext ? 'X' : 'O';
+    setBoard(newBoard);
+
+    const [winner, line] = calculateWinner(newBoard);
+    if (winner) {
+      const winnerName = winner === 'X' ? player1Name : player2Name;
+      setWinningLine(line);
+      setScores(prev => ({
+        ...prev,
+        [winnerName]: prev[winnerName] + 1
+      }));
+      setScoreUpdated(winnerName);
+      setTimeout(() => setScoreUpdated(null), 500);
+      setShowConfetti(true);
+      setTimeout(() => setShowConfetti(false), 5000);
+      onGameEnd?.(winnerName);
+    } else if (!newBoard.includes(null)) {
+      onGameEnd?.(null);
+    } else {
+      setIsXNext(!isXNext);
+    }
+  }, [board, isXNext, player1Name, player2Name, onGameEnd]);
+
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     const handleArrowKey = (direction: 'up' | 'down' | 'left' | 'right') => {
       const currentIndex = selectedSquare === -1 ? 4 : selectedSquare;
@@ -119,39 +146,12 @@ const GameBoard: React.FC<GameBoardProps> = ({ player1Name, player2Name, onGameE
         }
         break;
     }
-  }, [selectedSquare]);
+  }, [selectedSquare, handleClick]);
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
-
-  const handleClick = (index: number) => {
-    if (board[index] || calculateWinner(board)[0]) return;
-
-    const newBoard = board.slice();
-    newBoard[index] = isXNext ? 'X' : 'O';
-    setBoard(newBoard);
-
-    const [winner, line] = calculateWinner(newBoard);
-    if (winner) {
-      const winnerName = winner === 'X' ? player1Name : player2Name;
-      setWinningLine(line);
-      setScores(prev => ({
-        ...prev,
-        [winnerName]: prev[winnerName] + 1
-      }));
-      setScoreUpdated(winnerName);
-      setTimeout(() => setScoreUpdated(null), 500);
-      setShowConfetti(true);
-      setTimeout(() => setShowConfetti(false), 5000);
-      onGameEnd?.(winnerName);
-    } else if (!newBoard.includes(null)) {
-      onGameEnd?.(null);
-    } else {
-      setIsXNext(!isXNext);
-    }
-  };
 
   const currentPlayer = isXNext ? player1Name : player2Name;
   const [winner] = calculateWinner(board);

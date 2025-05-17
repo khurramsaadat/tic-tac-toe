@@ -1,19 +1,23 @@
 'use client';
 
 import { useState } from 'react';
-import GameBoard from '../components/GameBoard';
-import PlayerForm from '../components/PlayerForm';
-import styles from './TwoPlayers.module.css';
+import dynamic from 'next/dynamic';
+import PlayerForm from '@/app/components/PlayerForm';
+import styles from './page.module.css';
 
-export default function TwoPlayersPage() {
-  const [player1Name, setPlayer1Name] = useState<string>('');
-  const [player2Name, setPlayer2Name] = useState<string>('');
+const GameBoard = dynamic(() => import('@/app/components/GameBoard'), {
+  ssr: false,
+});
+
+export default function TwoPlayers() {
+  const [player1Name, setPlayer1Name] = useState('');
+  const [player2Name, setPlayer2Name] = useState('');
   const [gameStarted, setGameStarted] = useState(false);
   const [gameKey, setGameKey] = useState(0);
 
-  const handleStartGame = (p1Name: string, p2Name: string) => {
-    setPlayer1Name(p1Name);
-    setPlayer2Name(p2Name);
+  const handleStartGame = (names: { player1: string; player2: string }) => {
+    setPlayer1Name(names.player1);
+    setPlayer2Name(names.player2);
     setGameStarted(true);
   };
 
