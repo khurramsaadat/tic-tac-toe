@@ -62,7 +62,6 @@ const GameBoard: React.FC<GameBoardProps> = ({ player1Name, player2Name, onGameE
   // Calculate current game state
   const [currentWinner] = calculateWinner(board);
   const currentPlayer = isXNext ? player1Name : player2Name;
-  const isDraw = !currentWinner && !board.includes(null);
 
   const getStatusMessage = useCallback(() => {
     if (gameState === 'won') {

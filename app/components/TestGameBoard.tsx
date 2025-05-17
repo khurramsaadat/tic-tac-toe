@@ -26,7 +26,7 @@ interface GameState {
 }
 
 type GameAction =
-  | { type: 'MAKE_MOVE'; index: number; player1Name: string; player2Name: string }
+  | { type: 'MAKE_MOVE'; index: number; player1Name: string; player2Name: string; onGameEnd?: (winner: string | null) => void }
   | { type: 'START_NEW_GAME' }
   | { type: 'SET_SELECTED_SQUARE'; square: number }
   | { type: 'CLEAR_SCORE_UPDATE' };
@@ -64,6 +64,7 @@ const gameReducer = (state: GameState, action: GameAction): GameState => {
       if (winner) {
         console.log('Winner detected:', winner);
         const winnerName = winner === 'X' ? action.player1Name : action.player2Name;
+        action.onGameEnd?.(winnerName);
         return {
           ...state,
           board: newBoard,
@@ -80,6 +81,7 @@ const gameReducer = (state: GameState, action: GameAction): GameState => {
 
       if (isDraw) {
         console.log('Draw detected');
+        action.onGameEnd?.(null);
         return {
           ...state,
           board: newBoard,
@@ -160,8 +162,14 @@ const TestGameBoard: React.FC<TestGameBoardProps> = ({ player1Name, player2Name,
   }, [state.scores]);
 
   const makeMove = useCallback((index: number) => {
-    dispatch({ type: 'MAKE_MOVE', index, player1Name, player2Name });
-  }, [player1Name, player2Name]);
+    dispatch({ 
+      type: 'MAKE_MOVE', 
+      index, 
+      player1Name, 
+      player2Name,
+      onGameEnd 
+    });
+  }, [player1Name, player2Name, onGameEnd]);
 
   const getStatusMessage = useCallback(() => {
     console.log('Getting status message:', {
