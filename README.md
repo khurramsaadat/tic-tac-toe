@@ -1,13 +1,26 @@
 # Tic-Tac-Toe
 
-A responsive Next.js app with a modern UI, built using Tailwind CSS. Includes a reusable Navbar and Footer, and placeholder pages for game modes and About.
+A modern, responsive Tic-Tac-Toe game built with Next.js and featuring a sleek UI design.
 
 ## Features
 - Responsive layout with Navbar and Footer on all pages
-- Navbar links: Home, Two Players, Play With System, About
-- Footer with navigation links, social media icons (placeholders), and copyright
-- Placeholder pages for Two Players, Play With System, and About
-- Easy to extend and customize
+- Two Players mode with custom player names
+- Score tracking that persists between games
+- Keyboard navigation support
+- Winning animations and confetti celebration
+- Mobile-friendly design with burger menu
+- Accessibility features
+
+## Game Modes
+- Two Players: Play against a friend locally
+- Play with System: Coming soon! (AI opponent)
+
+## Tech Stack
+- Next.js 15.3.2
+- React 18
+- TypeScript
+- CSS Modules
+- react-confetti
 
 ## Getting Started
 
@@ -16,7 +29,10 @@ A responsive Next.js app with a modern UI, built using Tailwind CSS. Includes a 
 - npm (v9 or newer recommended)
 
 ### Installation
-1. Clone the repository or download the source code.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/khurramsaadat/tic-tac-toe.git
+   ```
 2. Install dependencies:
    ```bash
    npm install
@@ -25,17 +41,17 @@ A responsive Next.js app with a modern UI, built using Tailwind CSS. Includes a 
    ```bash
    npm run dev
    ```
-4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the app.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Project Structure
-- `app/components/Navbar.tsx` - Responsive navigation bar
-- `app/components/Footer.tsx` - Footer with links and social icons
-- `app/page.tsx` - Home page (hero section currently empty)
-- `app/two-players/page.tsx` - Two Players mode placeholder
-- `app/play-with-system/page.tsx` - Play With System mode placeholder
-- `app/about/page.tsx` - About page placeholder
-- `app/layout.tsx` - Main layout with Navbar and Footer
+- `app/components/` - Reusable components (Navbar, Footer, GameBoard, etc.)
+- `app/two-players/` - Two Players game mode
+- `app/play-with-system/` - AI opponent mode (coming soon)
+- `app/instructions/` - Game instructions and rules
+- `public/` - Static assets (images, SVGs)
+
+## Deployment
+The game is deployed on Netlify. Visit [Live Demo](#) to play!
 
 ## License
-
 This project is licensed under the MIT License. See [LICENSE](./LICENSE) for details.
