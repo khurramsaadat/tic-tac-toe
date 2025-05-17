@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.3.1] - 2024-03-20
+
+### Fixed
+- ESLint errors in GameBoard and TestGameBoard components
+- Unused variable warnings
+- Proper handling of onGameEnd callback in TestGameBoard
+- Code cleanup for better maintainability
+
 ## [0.3.0] - 2024-03-20
 
 ### Added

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, useReducer } from 'react';
+import { useEffect, useCallback, useReducer } from 'react';
 import Image from 'next/image';
 import styles from './TestGameBoard.module.css';
 
