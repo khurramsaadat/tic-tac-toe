@@ -1,0 +1,131 @@
+.navbar {
+  background-color: #FFD700;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo a {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000000;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.logo a:hover {
+  color: #FF0000;
+}
+
+.links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.links a {
+  color: #000000;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.links a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.links a.active {
+  background-color: #000000;
+  color: #FFD700;
+}
+
+.burgerButton {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 51;
+}
+
+.burgerButton span {
+  width: 2rem;
+  height: 0.25rem;
+  background: #000000;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  position: relative;
+  transform-origin: 1px;
+}
+
+.burgerButton.open span:first-child {
+  transform: rotate(45deg);
+}
+
+.burgerButton.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.burgerButton.open span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+  }
+
+  .burgerButton {
+    display: flex;
+  }
+
+  .links {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #FFD700;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    z-index: 50;
+  }
+
+  .links.show {
+    display: flex;
+    animation: slideIn 0.3s ease-out;
+  }
+
+  .links a {
+    font-size: 1.5rem;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+} 

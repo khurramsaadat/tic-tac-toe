@@ -1,0 +1,232 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.scoreBoard {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 800px;
+  padding: 1.5rem 3rem;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+.playerScore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.playerName {
+  font-size: 1.8rem;
+  color: #FFD700;
+}
+
+.score {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.status {
+  font-size: 2rem;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.status.winner {
+  color: #FFD700;
+  font-size: 2.5rem;
+  font-weight: bold;
+  transform: scale(1.1);
+  background: rgba(255, 215, 0, 0.2);
+  animation: winnerPulse 2s infinite;
+}
+
+.boardWrapper {
+  position: relative;
+  width: 500px;
+  aspect-ratio: 1;
+  margin: 2rem 0;
+}
+
+.gridImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.board {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  height: 100%;
+}
+
+.square {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  margin: 0;
+}
+
+.square:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.square:focus {
+  outline: none;
+}
+
+.square:focus-visible {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.winningMark {
+  animation: winningMark 1s ease infinite;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes winningMark {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.1);
+    filter: brightness(1.5);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+@keyframes winnerPulse {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  }
+}
+
+@keyframes scoreUpdate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+    color: #FFD700;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.scoreUpdated {
+  animation: scoreUpdate 0.5s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .scoreBoard {
+    padding: 1rem 1.5rem;
+  }
+
+  .playerName {
+    font-size: 1.4rem;
+  }
+
+  .score {
+    font-size: 2rem;
+  }
+
+  .boardWrapper {
+    width: 400px;
+  }
+
+  .mark {
+    width: 80px;
+    height: 80px;
+  }
+
+  .status {
+    font-size: 1.5rem;
+  }
+
+  .status.winner {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .boardWrapper {
+    width: 320px;
+  }
+
+  .mark {
+    width: 60px;
+    height: 60px;
+  }
+
+  .playerName {
+    font-size: 1.2rem;
+  }
+
+  .score {
+    font-size: 1.8rem;
+  }
+} 
