@@ -1,85 +1,132 @@
 .navbar {
-  background-color: #FFD700;
-  padding: 1rem 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem 2rem;
+  background-color: #FFD700;
+  z-index: 1000;
+  border-bottom: 2px solid #000000;
 }
 
-.logo a {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #000000;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.logo a:hover {
-  color: #FF0000;
-}
-
-.links {
+.logo {
   display: flex;
-  gap: 2rem;
   align-items: center;
 }
 
-.links a {
-  color: #000000;
-  text-decoration: none;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+.logo img {
+  transition: transform 0.3s ease;
 }
 
-.links a:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
+.logo:hover img {
+  transform: rotate(360deg);
 }
 
-.links a.active {
-  background-color: #000000;
-  color: #FFD700;
-}
-
-.burgerButton {
+.menuButton {
   display: none;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 2rem;
-  height: 2rem;
-  background: transparent;
+  background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
-  z-index: 51;
+  padding: 0.5rem;
+  z-index: 1001;
 }
 
-.burgerButton span {
-  width: 2rem;
-  height: 0.25rem;
-  background: #000000;
-  border-radius: 10px;
+.menuIcon {
+  width: 24px;
+  height: 20px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.menuIcon span {
+  display: block;
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background-color: #000000;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.menuIcon span:first-child {
+  top: 0;
+}
+
+.menuIcon span:nth-child(2) {
+  top: 9px;
+}
+
+.menuIcon span:last-child {
+  top: 18px;
+}
+
+.menuIcon.open span:first-child {
+  transform: rotate(45deg);
+  top: 9px;
+}
+
+.menuIcon.open span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.menuIcon.open span:last-child {
+  transform: rotate(-45deg);
+  top: 9px;
+}
+
+.navLinks {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.navLinks a {
+  color: #000000;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
   transition: all 0.3s ease;
   position: relative;
-  transform-origin: 1px;
+  white-space: nowrap;
 }
 
-.burgerButton.open span:first-child {
-  transform: rotate(45deg);
+.navLinks a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #000000;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
 }
 
-.burgerButton.open span:nth-child(2) {
-  opacity: 0;
+.navLinks a:hover::after {
+  width: 80%;
 }
 
-.burgerButton.open span:nth-child(3) {
-  transform: rotate(-45deg);
+/* Add an overlay when mobile menu is open */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+}
+
+.overlay.active {
+  display: block;
 }
 
 @media (max-width: 768px) {
@@ -87,45 +134,50 @@
     padding: 1rem;
   }
 
-  .burgerButton {
-    display: flex;
+  .menuButton {
+    display: block;
   }
 
-  .links {
-    display: none;
+  .navLinks {
     position: fixed;
     top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #FFD700;
+    right: -100%;
+    height: 100vh;
+    width: 70%;
+    max-width: 300px;
+    background-color: #FFD700;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     gap: 2rem;
     padding: 2rem;
-    z-index: 50;
+    transition: right 0.3s ease;
+    border-left: 2px solid #000000;
   }
 
-  .links.show {
-    display: flex;
-    animation: slideIn 0.3s ease-out;
+  .navLinks.active {
+    right: 0;
   }
 
-  .links a {
-    font-size: 1.5rem;
+  .navLinks a {
+    font-size: 1.3rem;
     width: 100%;
     text-align: center;
+    padding: 1rem;
+    border: 1px solid transparent;
   }
-}
 
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-100%);
+  .navLinks a::after {
+    display: none;
   }
-  to {
-    opacity: 1;
-    transform: translateX(0);
+
+  .navLinks a:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-color: #000000;
+  }
+
+  /* Add active link styles */
+  .navLinks a[aria-current="page"] {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-color: #000000;
   }
 } 
