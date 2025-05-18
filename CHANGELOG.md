@@ -341,4 +341,19 @@ All notable changes to this project will be documented in this file.
 - app/layout.tsx
 - app/page.module.css
 - scripts/convert-svg.js (new)
-- public/hero-background.png (new) 
+- public/hero-background.png (new)
+
+### Fixed
+- Fixed "Play with AI" card link in home page to correctly point to "/play-with-system"
+- Verified and confirmed all navigation links are working correctly
+- Ensured consistency between navbar, footer, and home page links
+
+### Technical
+- Confirmed all page components are properly connected:
+  - 2 Players (TestGameBoard)
+  - 2 Players+ (AdvancedGameBoard)
+  - Play with AI (AIGameBoard)
+  - Instructions page
+
+### Files Modified
+- app/page.tsx 

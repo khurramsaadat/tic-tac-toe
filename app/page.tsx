@@ -24,7 +24,7 @@ export default function Home() {
           <span className={styles.playButton}>Play Now</span>
         </Link>
 
-        <Link href="/play-with-ai" className={styles.modeCard}>
+        <Link href="/play-with-system" className={styles.modeCard}>
           <h2>PLAY WITH AI</h2>
           <p>Test your skills against our intelligent AI!</p>
           <span className={styles.playButton}>Play Now</span>
