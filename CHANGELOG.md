@@ -198,6 +198,12 @@ All notable changes to this project will be documented in this file.
 ## [0.4.0] - 2024-03-19
 
 ### Added
+- New "2 Players+" game mode with special rules
+  - Each player can only have three marks
+  - Placing a fourth mark removes the oldest mark
+- Added "2 Players+" link to navigation menu
+- Added "2 Players+" button to hero section
+- Added "2 Players+" link to footer navigation
 - Gradient color effects for X and O symbols
 - Red-to-orange gradient for X symbol
 - Blue-to-cyan gradient for O symbol
@@ -279,12 +285,60 @@ All notable changes to this project will be documented in this file.
 - Added sound management system with volume control
 - Improved user experience with audio feedback 
 
-## [1.0.1] - 2024-03-21
-### Removed
-- Removed unused GameBoard component and its styles
-- Removed (X) and (O) symbols from player names in scoreboard for cleaner UI
+## [0.3.10] - 2024-03-19
 
 ### Changed
-- Updated scoreboard layout to have player names and mute button in one row
-- Updated README.md to reflect current component structure
-- Simplified the codebase by consolidating game board implementation to TestGameBoard 
+- Updated navigation text from "Play with System" to "Play with AI" in Navbar and Footer
+- Updated button text in Hero component to match new naming
+- Maintained all existing functionality while improving naming consistency 
+
+## [0.3.11] - 2024-03-19
+
+### Changed
+- Simplified the development modal by removing the upcoming features section
+- Adjusted modal styling for a more concise presentation
+- Added a helpful message about clicking anywhere to continue
+- Reduced modal width for better focus on the main message 
+
+## [0.3.12] - 2024-03-19
+
+### Changed
+- Completely redesigned the instructions page with detailed information about all game modes
+- Added visual guides and animations for better understanding
+- Included game-specific tips and strategies
+- Enhanced mobile responsiveness and visual appeal
+- Created dedicated sections for 2 PLAYERS, 2 PLAYERS+, and PLAY WITH AI modes 
+
+## [0.3.13] - 2024-03-19
+
+### Added
+- Created BoardDemonstration component for generating game board visualizations
+- Added image generation page for creating board demonstration PNGs
+- Implemented three board visualizations:
+  - Classic mode with X and O marks
+  - Advanced mode with moving marks indication
+  - AI mode with thinking animation
+- Added gradient effects and animations to board demonstrations 
+
+## [2024-03-18]
+
+### Added
+- Created PNG version of hero background for better social media sharing
+- Added scripts/convert-svg.js for SVG to PNG conversion
+- Added OpenGraph metadata for improved social media sharing
+
+### Changed
+- Updated app/layout.tsx with proper metadata configuration
+- Reduced hero background opacity from 0.2 to 0.15 for better visual balance
+- Updated metadataBase URL to use the production domain (https://khurram-tictactoe.netlify.app)
+
+### Technical
+- Installed new dependencies:
+  - puppeteer (dev dependency)
+  - sharp (dev dependency)
+
+### Files Modified
+- app/layout.tsx
+- app/page.module.css
+- scripts/convert-svg.js (new)
+- public/hero-background.png (new) 

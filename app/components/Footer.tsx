@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from './Footer.module.css';
-import { FaXTwitter, FaInstagram, FaTwitter } from 'react-icons/fa6';
+import { FaXTwitter, FaInstagram, FaTiktok, FaFacebook } from 'react-icons/fa6';
 
 export default function Footer() {
   const pathname = usePathname();
@@ -20,10 +20,16 @@ export default function Footer() {
             2 PLAYERS
           </Link>
           <Link 
+            href="/2-players-plus"
+            aria-current={pathname === '/2-players-plus' ? 'page' : undefined}
+          >
+            2 PLAYERS+
+          </Link>
+          <Link 
             href="/play-with-system"
             aria-current={pathname === '/play-with-system' ? 'page' : undefined}
           >
-            PLAY WITH SYSTEM
+            PLAY WITH AI
           </Link>
           <Link 
             href="/instructions"
@@ -36,14 +42,14 @@ export default function Footer() {
         <div className={styles.section}>
           <h3>CONNECT</h3>
           <div className={styles.socialLinks}>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
-              <FaXTwitter />
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <FaFacebook />
             </a>
             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <FaInstagram />
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-              <FaTwitter />
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+              <FaTiktok />
             </a>
           </div>
         </div>

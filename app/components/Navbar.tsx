@@ -5,7 +5,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import styles from './Navbar.module.css';
-import { FaHome } from 'react-icons/fa';
+import { FaHome, FaUserFriends, FaRobot } from 'react-icons/fa';
+import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
+import { IoInformationCircleOutline } from 'react-icons/io5';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,7 +40,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={styles.navbar}>
+      <nav className={styles.navbar} data-page={pathname}>
         <div className={styles.logo}>
           <Link href="/" className={styles.homeLink}>
             <FaHome className={styles.homeIcon} />
@@ -70,23 +72,34 @@ const Navbar = () => {
           <Link 
             href="/2-players" 
             onClick={closeMenu}
-            aria-current={pathname === '/' || pathname === '/2-players' ? 'page' : undefined}
+            aria-current={pathname === '/2-players' ? 'page' : undefined}
           >
-            2 PLAYERS
+            <FaUserFriends className={styles.navIcon} />
+            <span>2 PLAYERS</span>
+          </Link>
+          <Link 
+            href="/2-players-plus" 
+            onClick={closeMenu}
+            aria-current={pathname === '/2-players-plus' ? 'page' : undefined}
+          >
+            <GiPerspectiveDiceSixFacesRandom className={styles.navIcon} />
+            <span>2 PLAYERS+</span>
           </Link>
           <Link 
             href="/play-with-system" 
             onClick={closeMenu}
             aria-current={pathname === '/play-with-system' ? 'page' : undefined}
           >
-            PLAY WITH SYSTEM
+            <FaRobot className={styles.navIcon} />
+            <span>PLAY WITH AI</span>
           </Link>
           <Link 
             href="/instructions" 
             onClick={closeMenu}
             aria-current={pathname === '/instructions' ? 'page' : undefined}
           >
-            INSTRUCTIONS
+            <IoInformationCircleOutline className={styles.navIcon} />
+            <span>INSTRUCTIONS</span>
           </Link>
         </div>
       </nav>

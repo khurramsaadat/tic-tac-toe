@@ -23,8 +23,11 @@ export default function Hero() {
           <Link href="/2-players" className={styles.button}>
             Play 2 Players
           </Link>
+          <Link href="/2-players-plus" className={styles.button}>
+            Play 2 Players+
+          </Link>
           <Link href="/play-with-system" className={styles.button}>
-            Play with System
+            Play with AI
           </Link>
         </div>
       </div>

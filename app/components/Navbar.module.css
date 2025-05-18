@@ -131,6 +131,9 @@
   transition: all 0.3s ease;
   position: relative;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .navLinks a::after {
@@ -149,6 +152,10 @@
   width: 80%;
 }
 
+.navLinks a:hover .navIcon {
+  transform: scale(1.2);
+}
+
 .navLinks a[aria-current="page"] {
   font-weight: 700;
   background-color: rgba(0, 0, 0, 0.1);
@@ -156,6 +163,32 @@
 
 .navLinks a[aria-current="page"]::after {
   width: 80%;
+}
+
+.navLinks a[aria-current="page"] .navIcon {
+  color: #FF0000;
+}
+
+/* Remove background and underline for 2 PLAYERS link when on home page */
+.navbar[data-page="/"] .navLinks a[href="/2-players"] {
+  background-color: transparent;
+}
+
+.navbar[data-page="/"] .navLinks a[href="/2-players"]::after {
+  width: 0;
+}
+
+.navIcon {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.navLinks a:hover .navIcon {
+  transform: scale(1.2);
+}
+
+.navLinks a[aria-current="page"] .navIcon {
+  color: #FF0000;
 }
 
 /* Add an overlay when mobile menu is open */
@@ -210,6 +243,8 @@
     text-align: center;
     padding: 1rem;
     border: 1px solid transparent;
+    justify-content: center;
+    gap: 1rem;
   }
 
   .navLinks a::after {
@@ -221,5 +256,15 @@
     background-color: rgba(0, 0, 0, 0.1);
     border-color: #000000;
     font-weight: 700;
+  }
+
+  .navIcon {
+    font-size: 1.4rem;
+  }
+
+  .navLinks a:hover .navIcon,
+  .navLinks a[aria-current="page"] .navIcon {
+    transform: scale(1.2);
+    color: #FF0000;
   }
 } 
