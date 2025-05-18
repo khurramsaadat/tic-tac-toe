@@ -2,7 +2,10 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 160px);
+  padding-top: 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 .title {
@@ -302,6 +305,7 @@
 @media (max-width: 768px) {
   .container {
     padding: 1rem;
+    padding-top: 0.5rem;
   }
 
   .title {

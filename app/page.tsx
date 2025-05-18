@@ -12,6 +12,12 @@ export default function Home() {
       </div>
 
       <div className={styles.gameModes}>
+        <Link href="/play-with-system" className={styles.modeCard}>
+          <h2>PLAY WITH AI</h2>
+          <p>Test your skills against our intelligent AI!</p>
+          <span className={styles.playButton}>Play Now</span>
+        </Link>
+
         <Link href="/2-players" className={styles.modeCard}>
           <h2>2 PLAYERS</h2>
           <p>Challenge your friend in the classic game mode!</p>
@@ -21,12 +27,6 @@ export default function Home() {
         <Link href="/2-players-plus" className={styles.modeCard}>
           <h2>2 PLAYERS+</h2>
           <p>Try our exciting new mode with only three marks each!</p>
-          <span className={styles.playButton}>Play Now</span>
-        </Link>
-
-        <Link href="/play-with-system" className={styles.modeCard}>
-          <h2>PLAY WITH AI</h2>
-          <p>Test your skills against our intelligent AI!</p>
           <span className={styles.playButton}>Play Now</span>
         </Link>
       </div>

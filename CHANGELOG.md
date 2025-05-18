@@ -357,3 +357,178 @@ All notable changes to this project will be documented in this file.
 
 ### Files Modified
 - app/page.tsx 
+
+## [0.4.6] - 2024-03-19
+### Added
+- Hover animation for logo text that adds spacing between "tic", "tac", and "toe"
+- Smooth transition effect for the logo spacing animation 
+
+## [0.4.8] - 2024-03-19
+### Changed
+- Further reduced mobile menu height from 90vh to 60vh for better usability and more compact appearance 
+
+## [0.4.9] - 2024-03-19
+### Added
+- Subtle separators between mobile menu links for better visual organization
+- Improved mobile menu styling:
+  - Added light border separators between navigation items
+  - Removed border from last item
+  - Adjusted padding for better touch targets
+  - Enhanced transition effects 
+
+## [0.5.0] - 2024-03-19
+### Changed
+- Enhanced mobile menu visual appearance:
+  - Added semi-transparent background (90% opacity)
+  - Implemented backdrop blur effect for modern glass-like appearance
+  - Added subtle box shadow for depth
+  - Improved hover states with adjusted opacity
+  - Enhanced overlay backdrop filter
+  - Optimized for better readability with transparent elements 
+
+## [0.5.1] - 2024-03-19
+### Changed
+- Increased mobile menu transparency to 80% (reduced background opacity from 0.9 to 0.2)
+- Enhanced glass-like effect with higher transparency while maintaining readability 
+
+## [0.5.2] - 2024-03-19
+### Changed
+- Improved mobile menu item styling:
+  - Removed background colors from menu items
+  - Added subtle slide animation on hover
+  - Added red indicator bar for active page
+  - Enhanced visual hierarchy with transparent elements
+  - Improved touch feedback and interactions
+
+## [0.5.3] - 2024-03-19
+### Changed
+- Improved mobile menu positioning:
+  - Pushed menu down below navbar (80px from top)
+  - Centered menu items vertically within the container
+  - Maintained right alignment and slide-in animation
+  - Adjusted padding for better vertical spacing
+  - Optimized layout for better accessibility
+
+## [0.5.4] - 2024-03-19
+### Changed
+- Updated mobile menu colors to white:
+  - Changed text color to white
+  - Updated icons to white
+  - Added subtle white glow effects on hover
+  - Changed separators to white with low opacity
+  - Updated active indicator to white with glow effect
+  - Enhanced visual contrast for better readability
+
+## [0.5.5] - 2024-03-19
+### Changed
+- Enhanced mobile menu text and icon visibility:
+  - Added subtle text shadow to menu items
+  - Added drop shadow to icons
+  - Enhanced shadow effects on hover states
+  - Improved readability against transparent background
+  - Maintained existing glow effects while adding depth
+
+## [0.5.6] - 2024-03-19
+### Changed
+- Increased mobile menu shadow intensity:
+  - Changed to solid black shadows for stronger contrast
+  - Adjusted text shadow values for better readability
+  - Enhanced icon shadow depth
+  - Strengthened hover state shadows
+  - Maintained white glow effects for interactivity
+
+## [0.5.7] - 2024-03-19
+### Changed
+- Added rounded corners to mobile menu:
+  - Applied 20px border radius to left corners
+  - Enhanced modern appearance with curved edges
+  - Maintained glass-like effect with rounded corners
+  - Improved visual consistency with other UI elements
+
+## [0.5.8] - 2024-03-19
+### Changed
+- Added white border to mobile menu:
+  - Replaced dark left border with full white border
+  - Set border width to 1px
+  - Used solid white color for clean appearance
+  - Enhanced glass-like effect with subtle border outline
+
+## [0.5.9] - 2024-03-19
+### Changed
+- Improved mobile menu spacing:
+  - Increased gap between menu links to 1.5rem
+  - Adjusted link padding for better balance
+  - Enhanced visual separation between items
+  - Optimized vertical rhythm of menu items
+  - Maintained clean layout with improved spacing
+
+## [0.6.0] - 2024-03-19
+### Fixed
+- Instructions page mobile layout:
+  - Adjusted container height to properly account for navbar and footer
+  - Reduced top padding to prevent content overlap with navbar
+  - Ensured menu icon visibility on mobile view
+  - Optimized spacing for better mobile experience
+
+## [0.6.1] - 2024-03-19
+### Fixed
+- Mobile menu button visibility:
+  - Added proper z-index to Instructions page container
+  - Ensured menu button remains visible on hover
+  - Fixed menu button disappearing issue
+  - Maintained consistent menu accessibility
+
+## [0.6.2] - 2024-03-19
+### Fixed
+- Mobile menu button positioning:
+  - Fixed menu button position to stay consistently on the right
+  - Added absolute positioning to prevent layout shifts
+  - Ensured proper vertical centering
+  - Maintained consistent spacing across all pages
+
+## [0.6.3] - 2024-03-19
+### Changed
+- Reordered navigation links in Navbar and Footer:
+  - Moved "PLAY WITH AI" to first position
+  - Updated order in both main navigation and footer
+  - Maintained consistent order across all navigation areas
+  - Improved navigation hierarchy and user flow
+
+## [0.6.4] - 2024-03-19
+### Changed
+- Reordered game modes on home page:
+  - Moved "PLAY WITH AI" card to first position
+  - Updated order to match navigation menu
+  - Maintained consistent order across all sections
+  - Enhanced focus on AI gameplay option
+
+## [0.6.5] - 2024-03-19
+### Removed
+- Cleaned up unused files and directories:
+  - Removed /app/about unused page
+  - Removed empty directories (play-with-players, play-with-friends, play-with-ai)
+  - Removed unused SVG assets (vercel.svg, next.svg, file.svg, globe.svg, window.svg)
+  - Cleaned up redundant route directories
+  - Optimized project structure
+
+## [0.6.6] - 2024-03-19
+### Added
+- Enhanced social media preview support:
+  - Created dedicated social preview image generator script
+  - Added optimized social preview image (1200x630)
+  - Implemented proper OpenGraph metadata
+  - Added Twitter card support
+  - Improved WhatsApp link preview
+
+### Changed
+- Updated metadata configuration in layout.tsx:
+  - Removed duplicate meta tags
+  - Optimized title and description
+  - Added proper image dimensions
+  - Enhanced SEO metadata
+
+### Technical
+- Added new development dependencies:
+  - puppeteer for social preview generation
+  - sharp for image optimization
+- Added new npm script: generate-social

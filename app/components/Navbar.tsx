@@ -70,6 +70,14 @@ const Navbar = () => {
           role="navigation"
         >
           <Link 
+            href="/play-with-system" 
+            onClick={closeMenu}
+            aria-current={pathname === '/play-with-system' ? 'page' : undefined}
+          >
+            <FaRobot className={styles.navIcon} />
+            <span>PLAY WITH AI</span>
+          </Link>
+          <Link 
             href="/2-players" 
             onClick={closeMenu}
             aria-current={pathname === '/2-players' ? 'page' : undefined}
@@ -84,14 +92,6 @@ const Navbar = () => {
           >
             <GiPerspectiveDiceSixFacesRandom className={styles.navIcon} />
             <span>2 PLAYERS+</span>
-          </Link>
-          <Link 
-            href="/play-with-system" 
-            onClick={closeMenu}
-            aria-current={pathname === '/play-with-system' ? 'page' : undefined}
-          >
-            <FaRobot className={styles.navIcon} />
-            <span>PLAY WITH AI</span>
           </Link>
           <Link 
             href="/instructions" 

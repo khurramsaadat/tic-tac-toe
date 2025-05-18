@@ -14,6 +14,12 @@ export default function Footer() {
         <div className={styles.section}>
           <h3>NAVIGATION</h3>
           <Link 
+            href="/play-with-system"
+            aria-current={pathname === '/play-with-system' ? 'page' : undefined}
+          >
+            PLAY WITH AI
+          </Link>
+          <Link 
             href="/2-players"
             aria-current={pathname === '/2-players' ? 'page' : undefined}
           >
@@ -24,12 +30,6 @@ export default function Footer() {
             aria-current={pathname === '/2-players-plus' ? 'page' : undefined}
           >
             2 PLAYERS+
-          </Link>
-          <Link 
-            href="/play-with-system"
-            aria-current={pathname === '/play-with-system' ? 'page' : undefined}
-          >
-            PLAY WITH AI
           </Link>
           <Link 
             href="/instructions"
