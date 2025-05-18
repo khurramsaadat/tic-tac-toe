@@ -24,16 +24,22 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Tic Tac Toe',
     description: 'Play Tic Tac Toe with friends or challenge our AI!',
-    images: [
-      {
-        url: '/hero-background.png',
-        width: 1200,
-        height: 1200,
-        alt: 'Tic Tac Toe Game Preview',
-      }
-    ],
+    images: [{
+      url: 'https://khurram-tictactoe.netlify.app/hero-background.png',
+      width: 1200,
+      height: 1200,
+      alt: 'Tic Tac Toe Game Preview',
+    }],
     type: 'website',
     siteName: 'Tic Tac Toe',
+    locale: 'en_US',
+    url: 'https://khurram-tictactoe.netlify.app',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Tic Tac Toe',
+    description: 'Play Tic Tac Toe with friends or challenge our AI!',
+    images: ['https://khurram-tictactoe.netlify.app/hero-background.png'],
   },
 };
 
