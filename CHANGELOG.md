@@ -4,6 +4,94 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.3.6] - 2024-03-19
+### Changed
+- Doubled the size of X and O symbols in 2-players mode
+- Increased stroke width for better visibility
+- Adjusted animation parameters for larger symbols
+
+## [0.3.5] - 2024-03-19
+### Changed
+- Updated social links to show X (Twitter), Instagram, and Twitter icons
+- Replaced LinkedIn icon with Twitter icon
+- Maintained consistent icon styling and hover effects
+
+## [0.3.4] - 2024-03-19
+### Changed
+- Further reduced footer height by adjusting remaining spacings
+- Updated copyright section padding to maintain proportions
+- Fixed mobile view gaps to match new compact layout
+
+## [0.3.3] - 2024-03-19
+### Changed
+- Reduced footer height to approximately 1/3rd of original size
+- Adjusted padding and spacing in footer sections
+- Optimized footer text sizes for compact layout
+
+## [0.3.2] - 2024-03-19
+### Changed
+- Updated logo text to lowercase "tictactoe"
+- Maintained black color for "tic" and "toe", grey for "tac"
+
+## [0.3.1] - 2024-03-19
+### Changed
+- Replaced SVG logo with direct text styling
+- Implemented "TICTACTOE" text with black and grey colors
+- Added bold font styling for the logo text
+- Removed unused logo.svg file
+
+## [0.3.0] - 2024-03-19
+### Changed
+- Updated logo to text-based design with "TICTACTOE"
+- Used black color for "TIC" and "TOE", grey for "TAC"
+- Implemented bold font using Inter font family
+- Adjusted logo dimensions in navigation bar
+
+## [0.2.9] - 2024-03-19
+### Fixed
+- Improved logo rendering by using SVG paths instead of fonts
+- Adjusted logo dimensions for better visibility
+- Enhanced text clarity in the logo
+
+## [0.2.8] - 2024-03-19
+### Changed
+- Updated logo to text-based design with "TICTACTOE"
+- Used black color for "TIC" and "TOE", grey for "TAC"
+- Implemented bold font using Inter font family
+- Adjusted logo dimensions in navigation bar
+
+## [0.2.7] - 2024-03-19
+### Changed
+- Reordered navigation links to make 2 PLAYERS the first link in Navbar
+- Ensured consistent navigation order across Navbar and Footer
+
+## [0.2.6] - 2024-03-19
+### Changed
+- Updated root page to redirect to 2 PLAYERS instead of PLAY WITH SYSTEM
+- Modified navigation active state logic to reflect new root page redirect
+
+## [0.2.5] - 2024-03-19
+### Changed
+- Updated all navigation links to uppercase in Navbar and Footer
+- Updated section headings to uppercase in Footer
+- Fixed outdated link in Footer (from /two-players to /2-players)
+
+## [0.2.4] - 2024-03-19
+### Changed
+- Renamed TEST page to 2 PLAYERS
+- Updated navigation to reflect the new page name
+- Changed route from /test to /2-players
+
+## [0.2.3] - 2024-03-19
+### Removed
+- Two Players page and related navigation
+- Two Players route and components
+
+### Changed
+- Updated home page to redirect to Play With System
+- Modified navigation to reflect new structure
+- Simplified routing and navigation logic
+
 ## [0.2.2] - 2024-03-19
 ### Changed
 - Updated Netlify deployment configuration
@@ -74,4 +162,100 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Fixed build configuration for Netlify deployment
 - Resolved peer dependency issues with React and React DOM
-- Removed invalid experimental options from Next.js config 
+- Removed invalid experimental options from Next.js config
+
+## [0.3.7] - 2024-03-19
+
+### Added
+- Active page highlighting in Navbar and Footer
+- Visual indicators for current page in navigation
+- Smooth transitions for active link states
+
+### Changed
+- Enhanced navigation UX with active state styles
+- Improved accessibility with aria-current attributes
+- Updated hover effects for better visual feedback
+
+## [0.3.8] - 2024-03-19
+
+### Changed
+- Enhanced navigation link styling to maintain underline for active pages
+- Improved visual feedback by showing underline for both hover and active states
+- Separated hover and active state styles for better clarity
+
+## [0.3.9] - 2024-03-19
+
+### Added
+- Home icon to the left of TICTACTOE logo
+- Interactive hover effects for home icon
+- Improved navigation with direct home link
+
+### Changed
+- Updated logo section layout to accommodate home icon
+- Enhanced visual feedback for home icon interaction
+- Optimized spacing between logo elements 
+
+## [0.4.0] - 2024-03-19
+
+### Added
+- Gradient color effects for X and O symbols
+- Red-to-orange gradient for X symbol
+- Blue-to-cyan gradient for O symbol
+
+### Changed
+- Enhanced SVG animations for smoother transitions
+- Updated stroke styles with gradient colors
+- Improved visual appeal of game symbols 
+
+## [0.4.1] - 2024-03-19
+
+### Changed
+- Enhanced player registration form with matching gradient colors
+- Player 1 (X) input styled with red-to-orange gradient
+- Player 2 (O) input styled with blue-to-cyan gradient
+- Improved input field focus states with colored glows
+- Added smooth transitions and hover effects
+- Updated responsive design for better mobile experience 
+
+## [0.4.2] - 2024-03-19
+
+### Changed
+- Updated scoreboard with player-specific gradient colors
+- Player 1 (X) stats now show red-to-orange gradient
+- Player 2 (O) stats now show blue-to-cyan gradient
+- Enhanced winning player highlights with colored backgrounds
+- Improved score update animation with color-specific effects
+- Added subtle text shadows for better readability 
+
+## [0.4.3] - 2024-03-19
+
+### Removed
+- Next player status message and its grey background card
+- Unnecessary status display during active gameplay
+- Related turnInfo styles and media queries
+
+### Changed
+- Status container now only shows for winner and draw states
+- Improved status visibility with backdrop blur effect
+- Streamlined game interface for cleaner appearance 
+
+## [0.4.4] - 2024-03-19
+
+### Changed
+- Improved game board visual feedback:
+  - Added one-time light streak animation for winning lines
+  - Streak animation matches the direction of win (horizontal, vertical, diagonal)
+  - Streak scales responsively for different screen sizes
+
+### Removed
+- Simplified UI elements:
+  - Removed card background from winner message
+  - Removed (X) and (O) symbols from scoreboard player names
+  - Removed symbol indicators from winner announcements
+
+### Enhanced
+- Winner message styling:
+  - Reduced overall size for more compact display
+  - Added player-specific gradient colors (red-orange for Player 1, blue-cyan for Player 2)
+  - Improved animations and transitions
+  - Better responsive design across all screen sizes 

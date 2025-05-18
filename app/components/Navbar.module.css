@@ -15,6 +15,43 @@
 .logo {
   display: flex;
   align-items: center;
+  gap: 1rem;
+}
+
+.homeLink {
+  display: flex;
+  align-items: center;
+  color: #000000;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.homeIcon {
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.homeLink:hover .homeIcon {
+  transform: scale(1.2);
+  color: #FF0000;
+}
+
+.logo a {
+  text-decoration: none;
+}
+
+.logoText {
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: -0.5px;
+}
+
+.black {
+  color: #000000;
+}
+
+.grey {
+  color: #666666;
 }
 
 .logo img {
@@ -112,6 +149,15 @@
   width: 80%;
 }
 
+.navLinks a[aria-current="page"] {
+  font-weight: 700;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.navLinks a[aria-current="page"]::after {
+  width: 80%;
+}
+
 /* Add an overlay when mobile menu is open */
 .overlay {
   display: none;
@@ -170,14 +216,10 @@
     display: none;
   }
 
-  .navLinks a:hover {
+  .navLinks a:hover,
+  .navLinks a[aria-current="page"] {
     background-color: rgba(0, 0, 0, 0.1);
     border-color: #000000;
-  }
-
-  /* Add active link styles */
-  .navLinks a[aria-current="page"] {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-color: #000000;
+    font-weight: 700;
   }
 } 

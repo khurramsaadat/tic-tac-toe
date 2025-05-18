@@ -47,6 +47,30 @@ const calculateWinner = (squares: Array<string | null>): [string | null, number[
   return [null, null];
 };
 
+const getWinningLineType = (line: number[]): string => {
+  // Horizontal lines
+  if ((line[0] === 0 && line[1] === 1 && line[2] === 2) ||
+      (line[0] === 3 && line[1] === 4 && line[2] === 5) ||
+      (line[0] === 6 && line[1] === 7 && line[2] === 8)) {
+    return 'horizontal';
+  }
+  // Vertical lines
+  if ((line[0] === 0 && line[1] === 3 && line[2] === 6) ||
+      (line[0] === 1 && line[1] === 4 && line[2] === 7) ||
+      (line[0] === 2 && line[1] === 5 && line[2] === 8)) {
+    return 'vertical';
+  }
+  // Diagonal line (top-left to bottom-right)
+  if (line[0] === 0 && line[1] === 4 && line[2] === 8) {
+    return 'diagonal';
+  }
+  // Diagonal line (top-right to bottom-left)
+  if (line[0] === 2 && line[1] === 4 && line[2] === 6) {
+    return 'diagonal-reverse';
+  }
+  return 'horizontal';
+};
+
 const gameReducer = (state: GameState, action: GameAction): GameState => {
   switch (action.type) {
     case 'MAKE_MOVE': {
@@ -164,21 +188,13 @@ const TestGameBoard: React.FC<TestGameBoardProps> = ({ player1Name, player2Name,
   }, [player1Name, player2Name]);
 
   const getStatusMessage = useCallback(() => {
-    console.log('Getting status message:', {
-      gameStatus: state.gameStatus,
-      gameEnded: state.gameEnded,
-      currentWinner,
-      board: state.board.join(',')
-    });
-
     if (state.gameStatus === 'won') {
       const winnerName = currentWinner === 'X' ? player1Name : player2Name;
       return (
         <div className={styles.winnerInfo}>
           <div className={styles.winnerTitle}>Winner!</div>
-          <div className={styles.winnerName}>
+          <div className={`${styles.winnerName} ${currentWinner === 'X' ? styles.winnerX : styles.winnerO}`}>
             {winnerName}
-            <span className={styles.winnerSymbol}>({currentWinner})</span>
           </div>
         </div>
       );
@@ -193,12 +209,8 @@ const TestGameBoard: React.FC<TestGameBoardProps> = ({ player1Name, player2Name,
       );
     }
 
-    return (
-      <div className={styles.turnInfo}>
-        Next player: {currentPlayer} ({state.isXNext ? 'X' : 'O'})
-      </div>
-    );
-  }, [state.gameStatus, state.gameEnded, currentWinner, state.board, state.isXNext, player1Name, player2Name, currentPlayer]);
+    return null;
+  }, [state.gameStatus, currentWinner, player1Name, player2Name]);
 
   return (
     <div className={styles.container}>
@@ -206,7 +218,7 @@ const TestGameBoard: React.FC<TestGameBoardProps> = ({ player1Name, player2Name,
         <div className={`${styles.playerScore} ${
           state.gameStatus === 'won' && currentWinner === 'X' ? styles.winningPlayer : ''
         }`}>
-          <span className={styles.playerName}>{player1Name} (X)</span>
+          <span className={styles.playerName}>{player1Name}</span>
           <span className={`${styles.score} ${state.scoreUpdated === player1Name ? styles.scoreUpdated : ''}`}>
             {state.scores[player1Name]}
           </span>
@@ -214,30 +226,12 @@ const TestGameBoard: React.FC<TestGameBoardProps> = ({ player1Name, player2Name,
         <div className={`${styles.playerScore} ${
           state.gameStatus === 'won' && currentWinner === 'O' ? styles.winningPlayer : ''
         }`}>
-          <span className={styles.playerName}>{player2Name} (O)</span>
+          <span className={styles.playerName}>{player2Name}</span>
           <span className={`${styles.score} ${state.scoreUpdated === player2Name ? styles.scoreUpdated : ''}`}>
             {state.scores[player2Name]}
           </span>
         </div>
       </div>
-
-      <div 
-        className={`${styles.status} ${
-          state.gameStatus === 'won' ? styles.winner : ''
-        } ${state.gameStatus === 'draw' ? styles.draw : ''}`}
-      >
-        {getStatusMessage()}
-      </div>
-      
-      {state.gameEnded && (
-        <button 
-          className={styles.newGameButton}
-          onClick={() => dispatch({ type: 'START_NEW_GAME' })}
-          aria-label="Start a new game"
-        >
-          Start New Game
-        </button>
-      )}
       
       <div className={styles.boardWrapper}>
         <Image 
@@ -265,13 +259,14 @@ const TestGameBoard: React.FC<TestGameBoardProps> = ({ player1Name, player2Name,
               {square && (
                 <div 
                   className={`${styles.mark} ${state.winningLine?.includes(index) ? styles.winningMark : ''}`}
-                  key={`${index}-${square}`}
+                  key={`${index}-${square}-${state.winningLine ? 'winning' : 'normal'}`}
+                  data-line={state.winningLine?.includes(index) ? getWinningLineType(state.winningLine) : undefined}
                 >
                   <Image
                     src={square === 'X' ? '/cross.svg' : '/zero.svg'}
                     alt={square}
-                    width={60}
-                    height={60}
+                    width={120}
+                    height={120}
                     priority
                   />
                 </div>
@@ -280,6 +275,26 @@ const TestGameBoard: React.FC<TestGameBoardProps> = ({ player1Name, player2Name,
           ))}
         </div>
       </div>
+
+      {(state.gameStatus === 'won' || state.gameStatus === 'draw') && (
+        <div 
+          className={`${styles.status} ${
+            state.gameStatus === 'won' ? styles.winner : ''
+          } ${state.gameStatus === 'draw' ? styles.draw : ''}`}
+        >
+          {getStatusMessage()}
+        </div>
+      )}
+
+      {state.gameEnded && (
+        <button 
+          className={styles.newGameButton}
+          onClick={() => dispatch({ type: 'START_NEW_GAME' })}
+          aria-label="Start a new game"
+        >
+          Start New Game
+        </button>
+      )}
     </div>
   );
 };

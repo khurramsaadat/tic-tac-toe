@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import styles from './Navbar.module.css';
+import { FaHome } from 'react-icons/fa';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,14 +40,15 @@ const Navbar = () => {
     <>
       <nav className={styles.navbar}>
         <div className={styles.logo}>
+          <Link href="/" className={styles.homeLink}>
+            <FaHome className={styles.homeIcon} />
+          </Link>
           <Link href="/">
-            <Image 
-              src="/logo.svg" 
-              alt="Tic Tac Toe" 
-              width={40} 
-              height={40} 
-              priority
-            />
+            <span className={styles.logoText}>
+              <span className={styles.black}>tic</span>
+              <span className={styles.grey}>tac</span>
+              <span className={styles.black}>toe</span>
+            </span>
           </Link>
         </div>
         <button 
@@ -66,32 +68,25 @@ const Navbar = () => {
           role="navigation"
         >
           <Link 
-            href="/" 
+            href="/2-players" 
             onClick={closeMenu}
-            aria-current={pathname === '/' ? 'page' : undefined}
+            aria-current={pathname === '/' || pathname === '/2-players' ? 'page' : undefined}
           >
-            Two Players
+            2 PLAYERS
           </Link>
           <Link 
             href="/play-with-system" 
             onClick={closeMenu}
             aria-current={pathname === '/play-with-system' ? 'page' : undefined}
           >
-            Play With System
-          </Link>
-          <Link 
-            href="/test" 
-            onClick={closeMenu}
-            aria-current={pathname === '/test' ? 'page' : undefined}
-          >
-            TEST
+            PLAY WITH SYSTEM
           </Link>
           <Link 
             href="/instructions" 
             onClick={closeMenu}
             aria-current={pathname === '/instructions' ? 'page' : undefined}
           >
-            Instructions
+            INSTRUCTIONS
           </Link>
         </div>
       </nav>
