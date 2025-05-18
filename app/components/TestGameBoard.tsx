@@ -3,6 +3,8 @@
 import { useState, useEffect, useCallback, useReducer } from 'react';
 import Image from 'next/image';
 import styles from './TestGameBoard.module.css';
+import SoundManager from '../utils/SoundManager';
+import MuteButton from './MuteButton';
 
 interface TestGameBoardProps {
   player1Name: string;
@@ -183,9 +185,28 @@ const TestGameBoard: React.FC<TestGameBoardProps> = ({ player1Name, player2Name,
     }
   }, [state.scores]);
 
+  // Add sound effects for game state changes
+  useEffect(() => {
+    const soundManager = SoundManager.getInstance();
+    
+    if (state.gameStatus === 'won') {
+      soundManager.playSound('win');
+    } else if (state.gameStatus === 'draw') {
+      soundManager.playSound('draw');
+    }
+  }, [state.gameStatus]);
+
   const makeMove = useCallback((index: number) => {
+    const soundManager = SoundManager.getInstance();
+    
+    if (state.board[index] || state.gameEnded) {
+      soundManager.playSound('invalid');
+      return;
+    }
+
+    soundManager.playSound('place');
     dispatch({ type: 'MAKE_MOVE', index, player1Name, player2Name });
-  }, [player1Name, player2Name]);
+  }, [state.board, state.gameEnded, player1Name, player2Name]);
 
   const getStatusMessage = useCallback(() => {
     if (state.gameStatus === 'won') {
@@ -215,22 +236,21 @@ const TestGameBoard: React.FC<TestGameBoardProps> = ({ player1Name, player2Name,
   return (
     <div className={styles.container}>
       <div className={styles.scoreBoard}>
-        <div className={`${styles.playerScore} ${
-          state.gameStatus === 'won' && currentWinner === 'X' ? styles.winningPlayer : ''
-        }`}>
-          <span className={styles.playerName}>{player1Name}</span>
-          <span className={`${styles.score} ${state.scoreUpdated === player1Name ? styles.scoreUpdated : ''}`}>
-            {state.scores[player1Name]}
-          </span>
+        <div className={styles.scoreContent}>
+          <div className={`${styles.playerScore} ${currentWinner === 'X' ? styles.winningPlayer : ''}`}>
+            <span className={styles.playerName}>{player1Name}</span>
+            <span className={`${styles.score} ${state.scoreUpdated === player1Name ? styles.scoreUpdated : ''}`}>
+              {state.scores[player1Name]}
+            </span>
+          </div>
+          <div className={`${styles.playerScore} ${currentWinner === 'O' ? styles.winningPlayer : ''}`}>
+            <span className={styles.playerName}>{player2Name}</span>
+            <span className={`${styles.score} ${state.scoreUpdated === player2Name ? styles.scoreUpdated : ''}`}>
+              {state.scores[player2Name]}
+            </span>
+          </div>
         </div>
-        <div className={`${styles.playerScore} ${
-          state.gameStatus === 'won' && currentWinner === 'O' ? styles.winningPlayer : ''
-        }`}>
-          <span className={styles.playerName}>{player2Name}</span>
-          <span className={`${styles.score} ${state.scoreUpdated === player2Name ? styles.scoreUpdated : ''}`}>
-            {state.scores[player2Name]}
-          </span>
-        </div>
+        <MuteButton />
       </div>
       
       <div className={styles.boardWrapper}>

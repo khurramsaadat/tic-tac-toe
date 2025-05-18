@@ -44,7 +44,7 @@ A modern, responsive Tic-Tac-Toe game built with Next.js and featuring a sleek U
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Project Structure
-- `app/components/` - Reusable components (Navbar, Footer, GameBoard, etc.)
+- `app/components/` - Reusable components (Navbar, Footer, TestGameBoard, etc.)
 - `app/two-players/` - Two Players game mode
 - `app/play-with-system/` - AI opponent mode (coming soon)
 - `app/instructions/` - Game instructions and rules

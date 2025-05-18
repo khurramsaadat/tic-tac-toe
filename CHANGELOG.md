@@ -259,3 +259,32 @@ All notable changes to this project will be documented in this file.
   - Added player-specific gradient colors (red-orange for Player 1, blue-cyan for Player 2)
   - Improved animations and transitions
   - Better responsive design across all screen sizes 
+
+## [0.4.5] - 2024-03-19
+
+### Added
+- Sound effects for game interactions:
+  - Click sound when placing X or O
+  - Victory sound when winning
+  - Draw game sound
+  - Error sound for invalid moves
+- Mute button in the top-right corner with:
+  - Smooth animations
+  - Persistent mute state
+  - Responsive design
+  - Accessibility support
+
+### Changed
+- Enhanced game feedback with audio cues
+- Added sound management system with volume control
+- Improved user experience with audio feedback 
+
+## [1.0.1] - 2024-03-21
+### Removed
+- Removed unused GameBoard component and its styles
+- Removed (X) and (O) symbols from player names in scoreboard for cleaner UI
+
+### Changed
+- Updated scoreboard layout to have player names and mute button in one row
+- Updated README.md to reflect current component structure
+- Simplified the codebase by consolidating game board implementation to TestGameBoard 
